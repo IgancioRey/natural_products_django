@@ -1,0 +1,63 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<div class="col-md-8 offset-md-2 mr-auto ml-auto mt-5">
+  <div class="card card-bordered">
+    <div class="card-header">
+      <strong>Datos del Producto</strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <dl>
+            <dt>Nombre</dt>
+            <dd>{{ product.name }}</dd>
+
+            <dt>Cantidad</dt>
+            <dd>{{ product.count }}</dd>
+
+            <dt>Precio</dt>
+            <dd>{{ product.price }}</dd>
+
+            <dt>Precio de venta</dt>
+            <dd>{{ product.sellingPrice }}</dd>
+
+          </dl>
+        </div>
+
+        <div class="col-md-6">
+          <dl>
+
+            <dt>Fecha de creación</dt>
+            <dd>{{ product.createdDate|date:"d/m/Y" }}</dd>
+
+            <dt>Fecha de modificación</dt>
+            <dd>{{ product.lastModifiedDate|date:"d/m/Y" }}</dd>
+
+          </dl>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <section class="card">
+            <a class="btn btn-outline-primary btn-lg btn-block mt-3" href="{% url 'product_edit' pk=product.pk %}"
+              role="button">
+              Editar
+            </a>
+          </section>
+        </div>
+        <div class="col-md-4 ml-auto">
+          <section class="card">
+            <a class="btn btn-outline-secondary btn-lg btn-block mt-3" href="{% url 'products_list' %}" role="button">
+              Volver
+            </a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

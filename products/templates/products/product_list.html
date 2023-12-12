@@ -1,0 +1,91 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<!-- sales report area start -->
+
+<div class="main-content-inner">
+    <div class="row">
+        <!-- Primary table start -->
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Listado de productos</h4>
+                    <div class="data-tables datatable-primary">
+                        <table id="bootstrap-data-table" class="stripe cell-border text-left">
+                            <thead class="text-capitalize">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Fecha de efecto</th>
+                                    <th>Precio</th>
+                                    <th>Precio Venta</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td>{{ product.name }}</td>
+                                    <td>{{ product.count }}</td>
+                                    {% if product.lastModifiedDate == None %}
+                                    <td>{{ product.createdDate|date:"d/m/Y" }}</td>
+                                    {% else %}
+                                    <td>{{ product.lastModifiedDate|date:"d/m/Y" }}</td>
+                                    {% endif %}
+                                    <td>{{ product.price }}</td>
+                                    <td>{{ product.sellingPrice }}</td>
+                                    <td>
+                                        <ul class="d-flex justify-content-center" style="margin-bottom: 0px">
+                                            <li class="mr-3" style="display:inline">
+                                                <a class="text-secondary" href="{% url 'product_edit' pk=product.pk %}"
+                                                    role="button">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            </li>
+                                            <li class="mr-3" style="display:inline">
+                                                <a class="text-secondary"
+                                                    href="{% url 'product_detail' pk=product.pk %}" role="button">
+                                                    <i class="fa fa-search"></i>
+                                                </a>
+                                            </li>
+                                            <li class="mr-3" style="display:inline">
+                                                <a class="text-secondary"
+                                                    href="{% url 'product_delete' pk=product.pk %}" role="button">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Primary table end -->
+    </div>
+</div>
+
+<!-- sales report area end -->
+{% endblock %}
+{% for message in messages %}
+<script>
+    $(function () {
+        let mensaje = "{{ message }}";
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        if (mensaje != "") {
+            Toast.fire({
+                icon: "{% if message.tags %}{{ message.tags }}{% endif %}",
+                title: mensaje,
+            })
+        }
+    });
+</script>
+{% endfor %}

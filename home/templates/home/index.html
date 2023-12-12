@@ -1,0 +1,85 @@
+{% extends 'home/base.html' %} {% block content %}
+<!-- sales report area start -->
+
+<div class="main-content-inner">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-md-4 mt-5">
+          <div class="card bg-flat" style="background-color: dodgerblue">
+            <div class="card-body">
+              <div class="h1 text-muted text-right mb-4">
+                <i class="fa fa-pencil-square-o text-light"></i>
+              </div>
+              <div class="h4 mb-0">
+                <a href="" class="text-light"><span>Pedidos</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mt-5">
+          <div class="card bg-flat" style="background-color: #009688">
+            <div class="card-body">
+              <div class="h1 text-muted text-right mb-4">
+                <i class="fa fa-users text-light"></i>
+              </div>
+              <div class="h4 mb-0">
+                <a href="" class="text-light"><span>Personas</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mt-5">
+          <div class="card bg-flat" style="background-color: #3f31b5">
+            <div class="card-body">
+              <div class="h1 text-muted text-right mb-4">
+                <i class="fa fa-leaf text-light"></i>
+              </div>
+              <div class="h4 mb-0">
+                <a href="{% url 'products_list' %}" class="text-light"><span>Productos</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-md-6 mt-5">
+          <div class="card">
+              <div class="seo-fact sbg3">
+                  <div class="p-4 d-flex justify-content-between align-items-center">
+                      <div class="seofct-icon">Impressions</div>
+                      <canvas id="seolinechart3" height="60"></canvas>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-6 mt-5">
+          <div class="card">
+              <div class="seo-fact sbg4">
+                  <div class="p-4 d-flex justify-content-between align-items-center">
+                      <div class="seofct-icon">New Users</div>
+                      <canvas id="seolinechart4" height="60"></canvas>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+        
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+<!-- sales report area end -->
+{% endblock %}
