@@ -6,12 +6,18 @@
 <div class="main-content-inner">
     <div class="row">
         <!-- Primary table start -->
-        <div class="col-12 mt-5">
+        <div class="col-2 mt-5">
+            <a href="{% url 'product_new' %}" class="btn btn-outline-primary">Nuevo Producto</a>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Primary table start -->
+        <div class="col-12 mt-2">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Listado de productos</h4>
                     <div class="data-tables datatable-primary">
-                        <table id="bootstrap-data-table" class="stripe cell-border text-left">
+                        <table id="data-table" class="stripe cell-border text-left">
                             <thead class="text-capitalize">
                                 <tr>
                                     <th>Nombre</th>
@@ -22,43 +28,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for product in products %}
-                                <tr>
-                                    <td>{{ product.name }}</td>
-                                    <td>{{ product.count }}</td>
-                                    {% if product.lastModifiedDate == None %}
-                                    <td>{{ product.createdDate|date:"d/m/Y" }}</td>
-                                    {% else %}
-                                    <td>{{ product.lastModifiedDate|date:"d/m/Y" }}</td>
-                                    {% endif %}
-                                    <td>{{ product.price }}</td>
-                                    <td>{{ product.sellingPrice }}</td>
-                                    <td>
-                                        <ul class="d-flex justify-content-center" style="margin-bottom: 0px">
-                                            <li class="mr-3" style="display:inline">
-                                                <a class="text-secondary" href="{% url 'product_edit' pk=product.pk %}"
-                                                    role="button">
-                                                    <i class="fa fa-pencil"></i>
-                                                </a>
-                                            </li>
-                                            <li class="mr-3" style="display:inline">
-                                                <a class="text-secondary"
-                                                    href="{% url 'product_detail' pk=product.pk %}" role="button">
-                                                    <i class="fa fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li class="mr-3" style="display:inline">
-                                                <a class="text-secondary"
-                                                    href="{% url 'product_delete' pk=product.pk %}" role="button">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
+
                         </table>
                     </div>
                 </div>
@@ -66,26 +36,158 @@
         </div>
         <!-- Primary table end -->
     </div>
-</div>
+    {% for product in products %}
+    <div class="modal fade" id="editProductModal{{ product.pk }}" tabindex="-1" role="dialog"
+        aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Editar Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="post-form">
+                        <div class="form-group col-md-12">
+                            <label for="name">Nombre</label>
+                            <input name="name" class="form-control" id="id_name_{{ product.pk }}"
+                                placeholder="Ingrese el nombre" type="text" value="{{ product.name }}"
+                                required="required" readonly />
+                            <br />
+                        </div>
 
-<!-- sales report area end -->
-{% endblock %}
-{% for message in messages %}
+                        <div class="form-group col-md-12">
+                            <label for="count">Cantidad</label>
+                            <input name="count" class="form-control" id="id_count_{{ product.pk }}"
+                                placeholder="Ingrese la cantidad" type="text" value="{{ product.count }}"
+                                required="required" readonly />
+                            <br />
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="price">Precio</label>
+                            <input name="price" class="form-control" id="id_price_{{ product.pk }}"
+                                placeholder="Ingrese el precio de compra" value="{{ product.price }}"
+                                required="required" />
+                            <br />
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="sellingPrice">Precio de venta</label>
+                            <input name="sellingPrice" class="form-control" id="id_sellingPrice_{{ product.pk }}"
+                                placeholder="Ingrese el precio de venta" value="{{ product.sellingPrice }}"
+                                required="required" />
+                            <br />
+                        </div>
+
+                        <div class="modal-footer">
+                            <!-- Cambia el tipo del botón a "submit" -->
+                            <button type="submit" class="btn btn-success" data-dismiss="modal"
+                                onclick="edit_product('{{ product.pk }}')">
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 <script>
-    $(function () {
-        let mensaje = "{{ message }}";
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
+    $(document).ready(function () {
+        var dataTable = $('#data-table').DataTable({
+            ajax: {
+                url: '/products/data/',
+                dataSrc: 'data'
+            },
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "Todos"]],
+            language: {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-AR.json"
+            },
+            columns: [
+                { data: 'name' },
+                { data: 'count' },
+                {
+                    data: 'lastModifiedDate',
+                    render: function (data) {
+                        return moment(data).format('DD/MM/YYYY');
+                    }
+                },
+                {
+                    data: 'price',
+                    render: function (data) {
+                        return parseFloat(data).toFixed(2);
+                    }
+                },
+                {
+                    data: 'sellingPrice',
+                    render: function (data) {
+                        return parseFloat(data).toFixed(2);
+                    }
+                },
+                // Columna para el botón de edición
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        var editUrl = "{% url 'product_detail' pk=0 %}".replace('0', row.pk);
+                        var deleteUrl = "{% url 'product_delete' pk=0 %}".replace('0', row.pk);
+
+                        return '<ul class="d-flex justify-content-center" style="margin-bottom: 0px">' +
+                            '<li class="mr-3" style="display:inline">' +
+                            '<a class="text-secondary edit-product" href="#" role="button" ' +
+                            'data-toggle="modal" data-target="#editProductModal' + row.pk + '">' +
+                            '<i class="fa fa-pencil"></i>' +
+                            '</a>' +
+                            '</li>' +
+                            '<li class="mr-3" style="display:inline">' +
+                            '<a class="text-secondary" href="' + editUrl + '" role="button">' +
+                            '<i class="fa fa-search"></i>' +
+                            '</a>' +
+                            '</li>' +
+                            '<li class="mr-3" style="display:inline">' +
+                            '<a class="text-secondary" href="' + deleteUrl + '" role="button">' +
+                            '<i class="fa fa-trash"></i>' +
+                            '</a>' +
+                            '</li>' +
+                            '</ul>';
+                    }
+                }
+            ]
         });
-        if (mensaje != "") {
-            Toast.fire({
-                icon: "{% if message.tags %}{{ message.tags }}{% endif %}",
-                title: mensaje,
-            })
-        }
+
+        dataTable.on('init.dt', function () {
+            window.dataTable = dataTable;
+        });
     });
+
+    function edit_product(idProduct) {
+        var name = $("#id_name_" + idProduct).val();
+        var count = $("#id_count_" + idProduct).val();
+        var price = $("#id_price_" + idProduct).val();
+        var sellingPrice = $("#id_sellingPrice_" + idProduct).val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/products/edit_modal/',
+            data: { idProduct: idProduct, name: name, count: count, price: price, sellingPrice: sellingPrice },
+            success: function (data) {
+                if (data.success) {
+                    if (window.dataTable) {
+                        window.dataTable.ajax.reload();
+                    }
+
+                } else {
+                    console.error('Error al actualizar el producto:', data.errors);
+                }
+
+            },
+            error: function (data) {
+            }
+        });
+
+    };
 </script>
-{% endfor %}
+
+{% endblock %}
