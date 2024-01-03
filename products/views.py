@@ -100,7 +100,7 @@ def product_edit(request, pk):
             product = form.save(commit=False)
             form.save()
             messages.success(request, 'Producto actualizado correctamente.')
-            return redirect('products_list')
+            return render(request, 'products/product_detail.html', {'product': product})
         else:
                 messages.error(request, 'No se pudo actualizar el producto.', extra_tags='danger')
     else:
