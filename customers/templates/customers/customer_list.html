@@ -1,0 +1,90 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<!-- sales report area start -->
+
+<div class="main-content-inner">
+    <div class="row">
+        <!-- Primary table start -->
+        <div class="col-2 mt-5">
+            <a href="" class="btn btn-outline-primary">Nuevo Cliente</a>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Primary table start -->
+        <div class="col-12 mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Listado de clientes</h4>
+                    <div class="data-tables datatable-primary">
+                        <table id="data-table" class="stripe cell-border text-left">
+                            <thead class="text-capitalize">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>                                    
+                                    <th>Número de Celular</th>
+                                    <th>Fecha de efecto</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Primary table end -->
+    </div>    
+</div>
+<script>
+    $(document).ready(function () {
+        var dataTable = $('#data-table').DataTable({
+            ajax: {
+                url: '/customers/data/',
+                dataSrc: 'data'
+            },
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "Todos"]],
+            language: {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-AR.json"
+            },
+            columns: [
+                { data: 'firstName' },
+                { data: 'lastName' },                
+                { data: 'mobileNumber' },
+                {
+                    data: 'lastModifiedDate',
+                    render: function (data) {
+                        return moment(data).format('DD/MM/YYYY');
+                    }
+                },             
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        var detailUrl = "{% url 'customer_detail' pk=0 %}".replace('0', row.pk);
+                        var deleteUrl = "{% url 'customer_delete' pk=0 %}".replace('0', row.pk);
+
+                        return '<ul class="d-flex justify-content-center" style="margin-bottom: 0px">' +
+                            '<li class="mr-3" style="display:inline">' +
+                            '<a class="text-secondary" href="' + detailUrl + '" role="button">' +
+                            '<i class="fa fa-pencil"></i>' +
+                            '</a>' +
+                            '</li>' +
+                            '<li class="mr-3" style="display:inline">' +
+                            '<a class="text-secondary" href="' + detailUrl + '" role="button">' +
+                            '<i class="fa fa-search"></i>' +
+                            '</a>' +
+                            '</li>' +
+                            '<li class="mr-3" style="display:inline">' +
+                            '<a class="text-secondary" href="' + deleteUrl + '" role="button">' +
+                            '<i class="fa fa-trash"></i>' +
+                            '</a>' +
+                            '</li>' +
+                            '</ul>';
+                    }
+                }
+            ]
+        });
+    });
+</script>
+
+{% endblock %}

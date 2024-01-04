@@ -1,0 +1,63 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<div class="col-md-8 offset-md-2 mr-auto ml-auto mt-5">
+    <div class="card card-bordered">
+        <div class="card-header">
+          <strong>Datos del Cliente</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <dl>
+                <dt>Nombre</dt>
+                <dd>{{ customer.firstName }}</dd>
+    
+                <dt>Apellido</dt>
+                <dd>{{ customer.lastName }}</dd>
+    
+                <dt>N° de Celular</dt>
+                <dd>{{ customer.mobileNumber }}</dd>
+    
+                <dt>Observación</dt>
+                <dd>{{ customer.observation }}</dd>
+    
+              </dl>
+            </div>
+    
+            <div class="col-md-6">
+              <dl>
+    
+                <dt>Fecha de creación</dt>
+                <dd>{{ customer.createdDate|date:"d/m/Y" }}</dd>
+    
+                <dt>Fecha de modificación</dt>
+                <dd>{{ customer.lastModifiedDate|date:"d/m/Y" }}</dd>
+    
+              </dl>
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col-md-4">
+              <section class="card">
+                <a class="btn btn-outline-primary btn-lg btn-block mt-3" href=""
+                  role="button">
+                  Editar
+                </a>
+              </section>
+            </div>
+            <div class="col-md-4 ml-auto">
+              <section class="card">
+                <a class="btn btn-outline-secondary btn-lg btn-block mt-3" href="{% url 'customer_list' %}" role="button">
+                  Volver
+                </a>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+{% endblock %}
