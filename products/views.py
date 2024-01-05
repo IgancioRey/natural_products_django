@@ -65,7 +65,7 @@ def product_list_json(request):
     return JsonResponse(response)
     
 
-
+@csrf_exempt
 def product_new(request):
     try:
         if request.method == "POST":
@@ -90,7 +90,7 @@ def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'products/product_detail.html', {'product': product})
 
-
+@csrf_exempt
 def product_edit(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
