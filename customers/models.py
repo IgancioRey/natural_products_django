@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 # Create your models here.
 class Customer(models.Model):
     firstName = models.CharField(
@@ -27,7 +28,7 @@ class Customer(models.Model):
     )
     createdDate = models.DateField()
     lastModifiedDate = models.DateField(auto_now=True, null=True)
-    
+
     def save(self, *args, **kwargs):
         if not self.createdDate:
             self.createdDate = timezone.now().date()
@@ -35,7 +36,7 @@ class Customer(models.Model):
 
     def __str__(self) -> str:
         return self.firstName + ' ' + self.lastName
-    
+
     def get_data(self):
         return {
             'pk': self.pk,

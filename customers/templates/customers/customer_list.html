@@ -7,7 +7,7 @@
     <div class="row">
         <!-- Primary table start -->
         <div class="col-2 mt-5">
-            <a href="" class="btn btn-outline-primary">Nuevo Cliente</a>
+            <a href="{% url 'customer_new' %}" class="btn btn-outline-primary">Nuevo Cliente</a>
         </div>
     </div>
     <div class="row">
@@ -60,12 +60,13 @@
                 {
                     data: null,
                     render: function (data, type, row) {
+                        var editUrl = "{% url 'customer_edit' pk=0 %}".replace('0', row.pk);
                         var detailUrl = "{% url 'customer_detail' pk=0 %}".replace('0', row.pk);
                         var deleteUrl = "{% url 'customer_delete' pk=0 %}".replace('0', row.pk);
 
                         return '<ul class="d-flex justify-content-center" style="margin-bottom: 0px">' +
                             '<li class="mr-3" style="display:inline">' +
-                            '<a class="text-secondary" href="' + detailUrl + '" role="button">' +
+                            '<a class="text-secondary" href="' + editUrl + '" role="button">' +
                             '<i class="fa fa-pencil"></i>' +
                             '</a>' +
                             '</li>' +

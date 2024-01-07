@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-o+t6y_ky81@)b8r8x#1ieis$aypgn9$q&isr!l9br&%d-4-7ax
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['natural-products-rafaela.azurewebsites.net']
+ALLOWED_HOSTS = ['natural-products-rafaela.azurewebsites.net', '127.0.0.1']
+
 
 
 # Application definition

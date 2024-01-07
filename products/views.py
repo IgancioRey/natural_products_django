@@ -9,7 +9,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
 
 
-
 def import_product_csv():
     default_products = []
     file_path = 'products\products.csv'
@@ -28,20 +27,19 @@ def import_product_csv():
                     "sellingPrice": row[4]
                 }
             )
-        
+
         for product_data in default_products:
             try:
-                product_form = ProductForm(product_data)        
+                product_form = ProductForm(product_data)
                 if product_form.is_valid():
                     product_form.save()
                 else:
                     print(f"Error al crear el producto {product_data['name']}")
             except Exception as e:
                 print(f"Error al crear el producto {product_data['name']}")
-        
 
-def products_list(request):    
-    
+
+def products_list(request):
     productList = Product.objects.order_by('name')
 
     if not productList:
@@ -56,14 +54,15 @@ def products_list(request):
         'products/product_list.html',
         {'products': productList}
     )
-    
+
+
 def product_list_json(request):
     productList = Product.objects.order_by('name')
     data = [product.get_data() for product in productList]
     response = {'data': data}
-    
+
     return JsonResponse(response)
-    
+
 
 @csrf_exempt
 def product_new(request):
@@ -80,7 +79,7 @@ def product_new(request):
             form = ProductForm()
 
         return render(request, 'products/product_create.html', {'form': form})
-    
+
     except Exception as e:
         print("Error:", str(e))
         return HttpResponseServerError("Ocurrió un error al procesar la solicitud.")
@@ -89,6 +88,7 @@ def product_new(request):
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'products/product_detail.html', {'product': product})
+
 
 @csrf_exempt
 def product_edit(request, pk):
@@ -102,11 +102,12 @@ def product_edit(request, pk):
             messages.success(request, 'Producto actualizado correctamente.')
             return render(request, 'products/product_detail.html', {'product': product})
         else:
-                messages.error(request, 'No se pudo actualizar el producto.', extra_tags='danger')
+            messages.error(request, 'No se pudo actualizar el producto.', extra_tags='danger')
     else:
         form = ProductFormEdit(instance=product)
 
     return render(request, 'products/product_edit.html', {'form': form})
+
 
 @csrf_exempt
 def product_edit_modal(request):
@@ -130,9 +131,10 @@ def product_edit_modal(request):
             messages.error(request, 'No se pudo actualizar el producto.', extra_tags='danger')
             return JsonResponse({'success': False, 'errors': errors})
 
+
 def product_delete(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    
+
     product.delete()
 
     return redirect('products_list')
