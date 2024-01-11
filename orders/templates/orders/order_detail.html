@@ -1,0 +1,62 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<div class="col-md-8 offset-md-2 mr-auto ml-auto mt-5">
+  <div class="card card-bordered">
+    <div class="card-header">
+      <strong>Datos del Pedido</strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <dl>
+            <dt>Fecha</dt>
+            <dd>{{ order.orderDate|date:"d/m/Y" }}</dd>
+
+            <dt>Cliente</dt>
+            <dd>{{ order.customer }}</dd>
+
+            <dt>Pagado</dt>
+            <dd><input type="checkbox" {% if order.paid %}checked{% endif %} disabled></dd>
+
+            <dt>Retirado</dt>
+            <dd><input type="checkbox" {% if order.withdrawn %}checked{% endif %} disabled></dd>
+
+          </dl>
+        </div>
+
+        <div class="col-md-6">
+          <dl>
+
+            <dt>Fecha de creación</dt>
+            <dd>{{ order.createdDate|date:"d/m/Y" }}</dd>
+
+            <dt>Fecha de modificación</dt>
+            <dd>{{ order.lastModifiedDate|date:"d/m/Y" }}</dd>
+
+          </dl>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <section class="card">
+            <a class="btn btn-outline-primary btn-lg btn-block mt-3" href="" role="button">
+              Editar
+            </a>
+          </section>
+        </div>
+        <div class="col-md-4 ml-auto">
+          <section class="card">
+            <a class="btn btn-outline-secondary btn-lg btn-block mt-3" href="" role="button">
+              Volver
+            </a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

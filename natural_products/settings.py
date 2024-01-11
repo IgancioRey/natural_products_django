@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o+t6y_ky81@)b8r8x#1ieis$aypgn9$q&isr!l9br&%d-4-7ax'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['natural-products-rafaela.azurewebsites.net', '127.0.0.1']
 
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'products',
-    'customers'
+    'customers',
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'natural_products',
-        'ENFORCE_SCHEMA': True,
+        'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'mongodb+srv://genaciorey:genaciorey123@clusterdev.tg7etor.mongodb.net/natural_products'
                     '?retryWrites=true&w=majority'
@@ -129,9 +130,11 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'home/static')]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+print(STATIC_ROOT)
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -144,7 +147,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'archivo-de-registro-de-errores.log'),
+            'filename': os.path.join(BASE_DIR, 'errors.log'),
         },
     },
     'loggers': {
@@ -155,3 +158,8 @@ LOGGING = {
         },
     },
 }
+
+WHITENOISE_IGNORE_PATTERNS = [
+    'bootstrap.min.css.map',
+    'assets/images/icon/favicon.ico',
+]

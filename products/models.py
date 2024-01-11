@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from datetime import date
 
+
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(
@@ -39,7 +40,7 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
-    
+
     def get_data(self):
         return {
             'pk': self.pk,

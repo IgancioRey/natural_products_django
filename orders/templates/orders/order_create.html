@@ -1,0 +1,61 @@
+{% extends 'home/base.html' %} {% block content %}
+
+<div class="row">
+  <div class="col-md-8 offset-md-2 mr-auto ml-auto mt-5">
+    <div class="card card-bordered">
+      <div class="card-header">
+        <strong>Datos del pedido</strong>
+      </div>
+      <div class="card-body">
+        <form method="POST" class="post-form">
+          {% csrf_token %}
+          <div class="form-group col-md-6">
+            <label for="orderDate">Fecha</label>
+            <input name="orderDate" type="date" class="form-control" id="id_orderDate"
+              placeholder="Ingrese la fecha del pedido" required="required" />
+            <br />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="customer">Cliente</label>
+            <select id="customerInput" class="form-control" name="customer">
+              <option value="" selected disabled>Seleccionar un cliente</option>
+              {% for customer in customers %}
+              <option value="{{ customer.pk }}">{{ customer }}</option>
+              {% endfor %}
+            </select>
+            <br />
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-outline-primary btn-lg btn-block mt-3">
+                Guardar
+              </button>
+            </div>
+            <div class="col-md-4 ml-auto">
+              <section class="card">
+                <a class="btn btn-outline-secondary btn-lg btn-block mt-3" href="" role="button">
+                  Volver
+                </a>
+              </section>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#customerInput").select2({
+    width: "100%", // Ajusta el ancho según tus necesidades
+    placeholder: "Seleccione un cliente", // Texto del placeholder
+    allowClear: false, // Permite borrar la selección
+  });
+  const today = new Date().toISOString().split('T')[0];
+
+  // Asignar la fecha actual al campo de fecha
+  document.getElementById('id_orderDate').value = today;
+</script>
+{% endblock %}
