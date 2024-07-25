@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.db import models
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -62,6 +63,22 @@ class OrderDetail(models.Model):
 
     def __str__(self):
         return f"Producto: {self.pk} - {self.product.name} - Cantidad: {self.count}"
+    
+    @property
+    def subTotal(self):
+        return Decimal(self.count) * Decimal(str(self.amount))
+    
+    def get_data(self):
+        order = get_object_or_404(Order, pk=self.order)
+        product = get_object_or_404(Product, pk=self.product)
+        return {
+            'pk': self.pk,
+            'order': order,
+            'product': product,
+            'count': self.count,
+            'amount': self.amount,
+            'subTotal': self.subTotal,
+        }
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

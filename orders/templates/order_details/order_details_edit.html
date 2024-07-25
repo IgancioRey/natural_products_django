@@ -1,0 +1,200 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-5">
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                <div class="card card-bordered">
+                    <div class="card-header">
+                        <strong>Pedido de {{ order.customer }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Pagado</th>
+                                    <th scope="col">Retirado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">{{ order.orderDate|date:"d/m/Y" }}</th>
+                                    <td>{{ order.customer }}</td>
+                                    <td><input type="checkbox" {% if order.paid %}checked{% endif %} disabled></td>
+                                    <td><input type="checkbox" {% if order.withdrawn %}checked{% endif %} disabled></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <div class="card card-bordered">
+                    <div class="card-header">
+                        <strong>Agregar productos</strong>
+                    </div>
+                    <div class="card-body">
+                        <form id="addProductForm">
+                            <input type="hidden" name="order_id" value="{{ order.pk }}">
+                            <div class="form-row">
+                                <div class="col-md-8 mt-2">
+                                    <label for="product"><strong>Producto</strong></label>
+                                    <select id="productInput" class="form-control" name="product">
+                                        <option value="" selected disabled>Seleccionar un producto</option>
+                                        {% for product in products %}
+                                        <option value="{{ product.pk }}">{{ product }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br />
+                                </div>
+                                <div class="col-md-2 offset-md-1 mt-2">
+                                    <label for="quantity"><strong>Cantidad</strong></label>
+                                    <select id="quantityInput" class="form-control" name="quantity">
+                                        {% for i in quantities %}
+                                        <option value="{{ i }}">{{ i }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br />
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <button type="submit" class="btn btn-outline-primary btn-md btn-block mt-2">
+                                        Agregar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="row">
+            <div class="col-md-12 mr-auto mt-5">
+                <div class="card card-bordered">
+                    <div class="card-header">
+                        <strong>Detalle</strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm" id="orderDetailsTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio</th>
+                                    <th style="text-align: right;">Subtotal</th>
+                                    <th style="text-align: right;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in orderDetail %}
+                                <tr>
+                                    <td>{{ item.product.name }}</td>
+                                    <td>{{ item.count }}</td>
+                                    <td>{{ item.product.sellingPrice }}</td>
+                                    <td align="right">{{ item.amount }}</td>
+                                    <td style="text-align: center;">
+                                        <div class="fa-hover">
+                                            <a onclick="" href="#">
+                                                <i class="fa fa-minus"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td>
+                                        <h3>Total</h3>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td align="right">
+                                        <h3>{{ total }}</h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 mr-auto ml-auto mt-5">
+        <section class="card">
+            <a class="btn btn-outline-primary btn-lg btn-block mt-3" href="" role="button">
+                Editar pedido
+            </a>
+        </section>
+    </div>
+    <div class="col-md-3 mr-auto ml-auto mt-5">
+        <section class="card">
+            <a class="btn btn-outline-primary btn-lg btn-block mt-3" href="" role="button">
+                Editar detalle
+            </a>
+        </section>
+    </div>
+    <div class="col-md-3 mr-auto ml-auto mt-5">
+        <section class="card">
+            <a class="btn btn-outline-secondary btn-lg btn-block mt-3" href="" role="button">
+                Volver
+            </a>
+        </section>
+    </div>
+</div>
+
+<script>
+    $("#productInput").select2({
+        width: "100%",
+        placeholder: "Seleccione un producto",
+        allowClear: false,
+    });
+    $("#quantityInput").select2({
+        width: "100%",
+        placeholder: "",
+        allowClear: false,
+        minimumResultsForSearch: Infinity // saco el cuadro de búsqueda
+    });
+    $('#quantityInput').val($('#quantityInput option:first').val()).trigger('change');
+
+    $('#addProductForm').on('submit', function (event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+        console.log(formData);
+        $.ajax({
+            type: 'POST',
+            url: '{% url "add_order_detail" %}',
+            data: formData,
+            success: function (response) {
+                console.log(response);
+                var newRow = '<tr>' +
+                    '<td>' + response.product + '</td>' +
+                    '<td>' + response.count + '</td>' +
+                    '<td>' + response.price + '</td>' +
+                    '<td align="right">' + response.amount + '</td>' +
+                    '</tr>';
+                $('#orderDetailsTable tbody').append(newRow);
+
+                var currentTotal = parseFloat($('#orderTotal').text());
+                var newTotal = currentTotal + parseFloat(response.amount);
+                $('#orderTotal').text(newTotal.toFixed(2));
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+                console.log('Status:', status);
+                console.log('Response:', xhr.responseText);
+            }
+        });
+    });
+
+</script>
+{% endblock %}

@@ -1,62 +1,109 @@
 {% extends 'home/base.html' %}
 
 {% block content %}
+<div class="row">
+  <div class="col-md-5 mt-5">
+    <div class="card card-bordered">
+      <div class="card-header">
+        <strong>Pedido de {{ order.customer }}</strong>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <dl>
+              <dt>Fecha</dt>
+              <dd>{{ order.orderDate|date:"d/m/Y" }}</dd>
 
-<div class="col-md-8 offset-md-2 mr-auto ml-auto mt-5">
-  <div class="card card-bordered">
-    <div class="card-header">
-      <strong>Datos del Pedido</strong>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-6">
-          <dl>
-            <dt>Fecha</dt>
-            <dd>{{ order.orderDate|date:"d/m/Y" }}</dd>
+              <dt>Cliente</dt>
+              <dd>{{ order.customer }}</dd>
 
-            <dt>Cliente</dt>
-            <dd>{{ order.customer }}</dd>
+              <dt>Pagado</dt>
+              <dd><input type="checkbox" {% if order.paid %}checked{% endif %} disabled></dd>
 
-            <dt>Pagado</dt>
-            <dd><input type="checkbox" {% if order.paid %}checked{% endif %} disabled></dd>
+              <dt>Retirado</dt>
+              <dd><input type="checkbox" {% if order.withdrawn %}checked{% endif %} disabled></dd>
 
-            <dt>Retirado</dt>
-            <dd><input type="checkbox" {% if order.withdrawn %}checked{% endif %} disabled></dd>
+            </dl>
+          </div>
 
-          </dl>
-        </div>
+          <div class="col-md-6">
+            <dl>
 
-        <div class="col-md-6">
-          <dl>
+              <dt>Fecha de creación</dt>
+              <dd>{{ order.createdDate|date:"d/m/Y" }}</dd>
 
-            <dt>Fecha de creación</dt>
-            <dd>{{ order.createdDate|date:"d/m/Y" }}</dd>
+              <dt>Fecha de modificación</dt>
+              <dd>{{ order.lastModifiedDate|date:"d/m/Y" }}</dd>
 
-            <dt>Fecha de modificación</dt>
-            <dd>{{ order.lastModifiedDate|date:"d/m/Y" }}</dd>
-
-          </dl>
+            </dl>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="row">
-        <div class="col-md-4">
-          <section class="card">
-            <a class="btn btn-outline-primary btn-lg btn-block mt-3" href="" role="button">
-              Editar
-            </a>
-          </section>
-        </div>
-        <div class="col-md-4 ml-auto">
-          <section class="card">
-            <a class="btn btn-outline-secondary btn-lg btn-block mt-3" href="" role="button">
-              Volver
-            </a>
-          </section>
-        </div>
+  <div class="col-md-7 mr-auto mt-5">
+    <div class="card card-bordered">
+      <div class="card-header">
+        <strong>Pedido de {{ order.customer }}</strong>
+      </div>
+      <div class="card-body">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th >Producto</th>
+              <th >Cantidad</th>
+              <th >Precio</th>
+              <th style="text-align: right;">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in orderDetail %}
+            <tr>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.count }}</td>
+              <td>{{ item.product.sellingPrice }}</td>
+              <td align="right">{{ item.amount }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td>
+                <h3>Total</h3>
+              </td>
+              <td></td>
+              <td></td>
+              <td align="right">
+                <h3>{{ total }}</h3>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-3 mr-auto ml-auto mt-5">
+    <section class="card">
+      <a class="btn btn-outline-primary btn-lg btn-block mt-3" href="" role="button">
+        Editar pedido
+      </a>
+    </section>
+  </div>
+  <div class="col-md-3 mr-auto ml-auto mt-5">
+    <section class="card">
+      <a class="btn btn-outline-primary btn-lg btn-block mt-3" href="" role="button">
+        Editar detalle
+      </a>
+    </section>
+  </div>
+  <div class="col-md-3 mr-auto ml-auto mt-5">
+    <section class="card">
+      <a class="btn btn-outline-secondary btn-lg btn-block mt-3" href="" role="button">
+        Volver
+      </a>
+    </section>
+  </div>
+</div>
 {% endblock %}

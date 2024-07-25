@@ -1,228 +1,156 @@
 {% load static %}
 <!doctype html>
 <html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Productos Naturales</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="{% static 'assets/images/icon/favicon.ico' %}"
-    />
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
-    <link
-      rel="stylesheet"
-      href="{% static 'assets/css/font-awesome.min.css' %}"
-    />
-    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/css/metisMenu.css' %}" />
-    <link
-      rel="stylesheet"
-      href="{% static 'assets/css/owl.carousel.min.css' %}"
-    />
-    <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}" />
-    <!-- amchart css -->
-    <link
-      rel="stylesheet"
-      href="https://www.amcharts.com/lib/3/plugins/export/export.css"
-      type="text/css"
-      media="all"
-    />
-    <!-- Start datatable css -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.datatables.net/colreorder/1.7.0/css/colReorder.bootstrap5.min.css"
-      rel="stylesheet"
-    />
 
-    <!-- others css -->
-    <link rel="stylesheet" href="{% static 'assets/css/typography.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/css/default-css.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" />
-    <!-- modernizr css -->
-    <script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Productos Naturales</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/icon/favicon.ico' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/metisMenu.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}" />
+  <!-- amchart css -->
+  <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+  <!-- Start datatable css -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+  <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet" />
+  <link href="https://cdn.datatables.net/colreorder/1.7.0/css/colReorder.bootstrap5.min.css" rel="stylesheet" />
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <!-- others css -->
+  <link rel="stylesheet" href="{% static 'assets/css/typography.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/default-css.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" />
+  <!-- modernizr css -->
+  <script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-  <body>
-    <div id="preloader">
-      <div class="loader"></div>
-    </div>
-    <!-- preloader area end -->
-    <!-- page container area start -->
-    <div class="page-container">
-      <!-- sidebar menu area start -->
-      <div class="sidebar-menu">
-        <div class="sidebar-header">
-          <div class="logo">
-            <a href="index.html"
-              ><img src="{% static 'assets/images/icon/logo.png' %}" alt="logo"
-            /></a>
-          </div>
+</head>
+
+<body>
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+  <!-- preloader area end -->
+  <!-- page container area start -->
+  <div class="page-container">
+    <!-- sidebar menu area start -->
+    <div class="sidebar-menu">
+      <div class="sidebar-header">
+        <div class="logo">
+          <a href="index.html"><img src="{% static 'assets/images/icon/logo.png' %}" alt="logo" /></a>
         </div>
-        <div class="main-menu">
-          <div class="menu-inner">
-            <nav>
-              <ul class="metismenu" id="menu">
-                <li>
-                  <a href="javascript:void(0)" aria-expanded="true"
-                    ><i class="fa fa-pencil-square-o"></i><span>Pedidos</span>
-                  </a>
-                  <ul class="collapse">
-                    <li>
-                      <a href="{% url 'order_new' %}"
-                        ><i class="fa fa-plus-square"></i
-                        ><span>Cargar pedido</span></a
-                      >
-                    </li>
-                    <li>
-                      <a href=""
-                        ><i class="fa fa-book"></i
-                        ><span>Listado de pedidos</span></a
-                      >
-                    </li>
-                    <li>
-                      <a href=""
-                        ><i class="fa fa-download"></i
-                        ><span>Exportar pedidos</span></a
-                      >
-                    </li>
-                    <li>
-                      <a href=""
-                        ><i class="fa fa-download"></i
-                        ><span>Control de pedidos</span></a
-                      >
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="javascript:void(0)" aria-expanded="true"
-                    ><i class="fa fa-users"></i><span>Clientes</span></a
-                  >
-                  <ul class="collapse">
-                    <li>
-                      <a href="{% url 'customer_new' %}"
-                        ><i class="fa fa-plus-square"></i
-                        ><span>Cargar cliente</span></a
-                      >
-                    </li>
-                    <li>
-                      <a href="{% url 'customer_list' %}"
-                        ><i class="fa fa-book"></i
-                        ><span>Listado de clientes</span></a
-                      >
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="javascript:void(0)" aria-expanded="true"
-                    ><i class="menu-icon fa fa-leaf"></i
-                    ><span>Productos</span></a
-                  >
-                  <ul class="collapse">
-                    <li>
-                      <a href="{% url 'product_new' %}"
-                        ><i class="fa fa-plus-square"></i
-                        ><span>Cargar producto</span></a
-                      >
-                    </li>
-                    <li>
-                      <a href="{% url 'products_list' %}"
-                        ><i class="fa fa-book"></i
-                        ><span>Listado de productos</span></a
-                      >
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
+      </div>
+      <div class="main-menu">
+        <div class="menu-inner">
+          <nav>
+            <ul class="metismenu" id="menu">
+              <li>
+                <a href="javascript:void(0)" aria-expanded="true"><i
+                    class="fa fa-pencil-square-o"></i><span>Pedidos</span>
+                </a>
+                <ul class="collapse">
+                  <li>
+                    <a href="{% url 'order_new' %}"><i class="fa fa-plus-square"></i><span>Cargar pedido</span></a>
+                  </li>
+                  <li>
+                    <a href=""><i class="fa fa-book"></i><span>Listado de pedidos</span></a>
+                  </li>
+                  <li>
+                    <a href=""><i class="fa fa-download"></i><span>Exportar pedidos</span></a>
+                  </li>
+                  <li>
+                    <a href=""><i class="fa fa-download"></i><span>Control de pedidos</span></a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-users"></i><span>Clientes</span></a>
+                <ul class="collapse">
+                  <li>
+                    <a href="{% url 'customer_new' %}"><i class="fa fa-plus-square"></i><span>Cargar cliente</span></a>
+                  </li>
+                  <li>
+                    <a href="{% url 'customer_list' %}"><i class="fa fa-book"></i><span>Listado de clientes</span></a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="javascript:void(0)" aria-expanded="true"><i
+                    class="menu-icon fa fa-leaf"></i><span>Productos</span></a>
+                <ul class="collapse">
+                  <li>
+                    <a href="{% url 'product_new' %}"><i class="fa fa-plus-square"></i><span>Cargar producto</span></a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products_list' %}"><i class="fa fa-book"></i><span>Listado de productos</span></a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!-- sidebar menu area end -->
+    <!-- main content area start -->
+    <div class="main-content">
+      <!-- header area start -->
+      <div class="header-area">
+        <div class="row align-items-center">
+          <!-- nav and search button -->
+          <div class="col-md-6 col-sm-8 clearfix">
+            <div class="pull-left">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="col-sm-6 clearfix">
+            <div class="user-area dropdown float-right">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="user-avatar rounded-circle" src="{% static 'assets/images/author/avatar.png' %}"
+                  alt="User Avatar" />
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right" style="right: auto; left: 0">
+                <a class="dropdown-item" href="#">Cerrar sesión</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- sidebar menu area end -->
-      <!-- main content area start -->
-      <div class="main-content">
-        <!-- header area start -->
-        <div class="header-area">
-          <div class="row align-items-center">
-            <!-- nav and search button -->
-            <div class="col-md-6 col-sm-8 clearfix">
-              <div class="pull-left">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-
-            <div class="col-sm-6 clearfix">
-              <div class="user-area dropdown float-right">
-                <a
-                  href="#"
-                  class="dropdown-toggle"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <img
-                    class="user-avatar rounded-circle"
-                    src="{% static 'assets/images/author/avatar.png' %}"
-                    alt="User Avatar"
-                  />
-                </a>
-
-                <div
-                  class="dropdown-menu dropdown-menu-right"
-                  style="right: auto; left: 0"
-                >
-                  <a class="dropdown-item" href="#">Cerrar sesión</a>
-                </div>
-              </div>
+      <!-- header area end -->
+      <!-- page title area start -->
+      <div class="page-title-area">
+        <div class="row align-items-center">
+          <div class="col-sm-6">
+            <div class="breadcrumbs-area clearfix">
+              <h4 class="page-title pull-left">Dashboard</h4>
+              <ul class="breadcrumbs pull-left">
+                <li><a href="index.html">Home</a></li>
+                <li><span>Dashboard</span></li>
+              </ul>
             </div>
           </div>
         </div>
-        <!-- header area end -->
-        <!-- page title area start -->
-        <div class="page-title-area">
-          <div class="row align-items-center">
-            <div class="col-sm-6">
-              <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">Dashboard</h4>
-                <ul class="breadcrumbs pull-left">
-                  <li><a href="index.html">Home</a></li>
-                  <li><span>Dashboard</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- page title area end -->
+      </div>
+      <!-- page title area end -->
 
-        <!-- {% if messages %}
+      <!-- {% if messages %}
       {% for message in messages %}
       <div class="row" id="row_message_{{ forloop.counter }}">
         <div class="col-md-8 offset-md-2 mr-auto ml-auto mt-5">
@@ -245,11 +173,14 @@
       {% endfor %}
       {% endif %} -->
 
+      <div class="main-content-inner">
         {% block content %} {% endblock %}
       </div>
-      <!-- main content area end -->
-      <!-- footer area start-->
-      <!-- <footer>
+      
+    </div>
+    <!-- main content area end -->
+    <!-- footer area start-->
+    <!-- <footer>
       <div class="footer-area">
         <p>
           © Copyright 2018. All right reserved. Template by
@@ -257,62 +188,60 @@
         </p>
       </div>
     </footer> -->
-      <!-- footer area end-->
-    </div>
-    <!-- page container area end -->
+    <!-- footer area end-->
+  </div>
+  <!-- page container area end -->
 
-    <!-- jquery latest version -->
-    <script src="{% static 'assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
-    <!-- bootstrap 4 js -->
-    <script src="{% static 'assets/js/popper.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'assets/js/metisMenu.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.slicknav.min.js' %}"></script>
+  <!-- jquery latest version -->
+  <script src="{% static 'assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
+  <!-- bootstrap 4 js -->
+  <script src="{% static 'assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'assets/js/metisMenu.min.js' %}"></script>
+  <script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
+  <script src="{% static 'assets/js/jquery.slicknav.min.js' %}"></script>
 
-    <!-- start chart js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <!-- start highcharts js -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <!-- start zingchart js -->
-    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-    <script>
-      zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-      ZC.LICENSE = [
-        "569d52cefae586f634c54f86dc99e6a9",
-        "ee6b7db5b51705a13dc2339db3edaf6d",
-      ];
-    </script>
-    <!-- all line chart activation -->
-    <script src="{% static 'assets/js/line-chart.js' %}"></script>
-    <!-- all pie chart -->
-    <script src="{% static 'assets/js/pie-chart.js' %}"></script>
+  <!-- start chart js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+  <!-- start highcharts js -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <!-- start zingchart js -->
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = [
+      "569d52cefae586f634c54f86dc99e6a9",
+      "ee6b7db5b51705a13dc2339db3edaf6d",
+    ];
+  </script>
+  <!-- all line chart activation -->
+  <script src="{% static 'assets/js/line-chart.js' %}"></script>
+  <!-- all pie chart -->
+  <script src="{% static 'assets/js/pie-chart.js' %}"></script>
 
-    <!-- Start datatable js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/colreorder/1.7.0/js/dataTables.colReorder.min.js"></script>
+  <!-- Start datatable js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+  <script src="https://cdn.datatables.net/colreorder/1.7.0/js/dataTables.colReorder.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 
-    <script
-      type="text/javascript"
-      charset="utf8"
-      src="https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-AR.json"
-    ></script>
-    <script src="{% static 'assets/js/init-scripts/data-table/datatables-init.js' %}"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-AR.json"></script>
+  <script src="{% static 'assets/js/init-scripts/data-table/datatables-init.js' %}"></script>
 
-    <!-- others plugins -->
-    <script src="{% static 'assets/js/plugins.js' %}"></script>
-    <script src="{% static 'assets/js/scripts.js' %}"></script>
-  </body>
+  <!-- others plugins -->
+  <script src="{% static 'assets/js/plugins.js' %}"></script>
+  <script src="{% static 'assets/js/scripts.js' %}"></script>
+</body>
+
 </html>
